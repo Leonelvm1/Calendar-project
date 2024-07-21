@@ -1,44 +1,50 @@
-// Manejador de registro
+// script.js
+
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('registerUsername').value;
     const password = document.getElementById('registerPassword').value;
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push({ username, password });
-    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('user', JSON.stringify({ username, password }));
     alert('Registro exitoso');
-    this.reset();
 });
 
-// Manejador de inicio de sesión
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        localStorage.setItem('currentUser', JSON.stringify(user));
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.username === username && user.password === password) {
         alert('Inicio de sesión exitoso');
-        this.reset();
     } else {
         alert('Nombre de usuario o contraseña incorrectos');
     }
 });
 
-// Manejador de agendamiento de citas
 document.getElementById('appointmentForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const date = document.getElementById('appointmentDate').value;
     const time = document.getElementById('appointmentTime').value;
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-        alert('Debe iniciar sesión para agendar una cita');
-        return;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        const appointments = JSON.parse(localStorage.getItem('appointments')) || {};
+        const userAppointments = appointments[user.username] || [];
+        userAppointments.push({ date, time });
+        appointments[user.username] = userAppointments;
+        localStorage.setItem('appointments', JSON.stringify(appointments));
+        alert('Cita agendada exitosamente');
+    } else {
+        alert('Debes iniciar sesión para agendar una cita');
     }
-    let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-    appointments.push({ user: currentUser.username, date, time });
-    localStorage.setItem('appointments', JSON.stringify(appointments));
-    alert('Cita agendada exitosamente');
-    this.reset();
+});
+
+document.getElementById('consultarDatos').addEventListener('click', function() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        const appointments = JSON.parse(localStorage.getItem('appointments')) || {};
+        const userAppointments = appointments[user.username] || [];
+        const datosDiv = document.getElementById('datosLocalStorage');
+        datosDiv.innerHTML = `<h5>Citas Agendadas:</h5><ul>${userAppointments.map(a => `<li>${a.date} ${a.time}</li>`).join('')}</ul>`;
+    } else {
+        alert('Debes iniciar sesión para consultar tus citas');
+    }
 });

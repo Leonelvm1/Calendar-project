@@ -1,24 +1,32 @@
+/* style.css */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f4f4f9; 
     color: #333;
-    margin: 0;
-    padding: 20px;
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    padding: 20px;
 }
 
-h1 {
+.card {
+    background-color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border: none; 
+    margin-bottom: 20px;
+}
+
+.card-title {
+    color: #007bff; 
+}
+
+h1, h2 {
     color: #444;
 }
 
-h2 {
-    color: #666;
-}
-
 form {
-    background: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -48,7 +56,7 @@ input[type="time"] {
 
 button {
     width: 100%;
-    background: #5cb85c;
+    background: #82db82;
     color: white;
     border: none;
     padding: 10px;
@@ -59,4 +67,9 @@ button {
 
 button:hover {
     background: #4cae4c;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
 }
