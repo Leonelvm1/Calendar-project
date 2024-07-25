@@ -1,7 +1,5 @@
-/* style.css */
-
 body {
-    background-color: #f4f4f9; 
+    background-color: #f4f4f9;
     color: #333;
     font-family: Arial, sans-serif;
     display: flex;
@@ -19,14 +17,20 @@ body {
 }
 
 .card-title {
-    color: #007bff; 
+    color: #007bff;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 h1, h2 {
     color: #444;
 }
 
-form {
+.styled-box {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -72,4 +76,13 @@ button:hover {
 .btn-center {
     display: flex;
     justify-content: center;
+}
+
+.styled-button {
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 20px;
 }
